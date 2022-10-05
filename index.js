@@ -1,22 +1,16 @@
-const express = require('express');
+const express = require("express");
+const cors = require("cors");
 const app = express();
-const path = require('path');
+const path = require("path");
 const port = 3000;
 
-app.use(express.static('public'));
+app.use(cors());
 
-app.set('view engine', 'ejs');
-app.set('views', './views');
+app.use("/roms", express.static("roms"));
 
-app.get('/api', (req, res) => {
-  res.send("api")
-})
-
-app.get('*', (req, res) => {
-  //res.send("hello")
-  res.sendFile(path.resolve('views/index.html'));
-})
+app.set("view engine", "ejs");
+app.set("views", "./views");
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
-})
+});
